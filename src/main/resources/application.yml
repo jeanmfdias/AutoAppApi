@@ -1,3 +1,13 @@
 spring:
   application:
     name: "api"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/autoappdb
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 9999
