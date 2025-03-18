@@ -22,6 +22,8 @@ public class Order {
 
     private LocalDate createdAt;
 
+    private LocalDate updatedAt;
+
     private Double odometer;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -35,6 +37,7 @@ public class Order {
 
         this.setOdometer(dto.odometer());
         this.setCreatedAt(LocalDate.now());
+        this.setUpdatedAt(LocalDate.now());
         this.setItems(orderItems);
     }
 }
