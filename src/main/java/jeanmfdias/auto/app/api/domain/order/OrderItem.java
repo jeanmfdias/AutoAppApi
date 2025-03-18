@@ -1,6 +1,7 @@
 package jeanmfdias.auto.app.api.domain.order;
 
 import jakarta.persistence.*;
+import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderItemDto;
 import lombok.*;
 
 @Entity
@@ -26,5 +27,11 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public OrderItem(CreateOrderItemDto dto) {
+        this.setDescription(dto.description());
+        this.setType(dto.type());
+        this.setValue(dto.value());
+    }
 
 }

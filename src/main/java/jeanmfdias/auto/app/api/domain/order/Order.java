@@ -1,6 +1,7 @@
 package jeanmfdias.auto.app.api.domain.order;
 
 import jakarta.persistence.*;
+import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -23,7 +24,17 @@ public class Order {
 
     private Double odometer;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
 
+    public Order(CreateOrderDto dto) {
+        List<OrderItem> orderItems = dto.items().stream()
+                .map(OrderItem::new)
+                .toList();
+        orderItems.forEach(item -> item.setOrder(this));
+
+        this.setOdometer(dto.odometer());
+        this.setCreatedAt(LocalDate.now());
+        this.setItems(orderItems);
+    }
 }
