@@ -5,7 +5,7 @@ import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderItemDto;
 import jeanmfdias.auto.app.api.domain.order.dto.UpdateOrderItemDto;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_items")
@@ -27,9 +27,9 @@ public class OrderItem {
 
     private Double value;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -39,8 +39,8 @@ public class OrderItem {
         this.setDescription(dto.description());
         this.setType(dto.type());
         this.setValue(dto.value());
-        this.setCreatedAt(LocalDate.now());
-        this.setUpdatedAt(LocalDate.now());
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 
     public OrderItem(UpdateOrderItemDto dto) {
@@ -48,9 +48,9 @@ public class OrderItem {
         this.setType(dto.type());
         this.setValue(dto.value());
         if (this.getCreatedAt() == null) {
-            this.setCreatedAt(LocalDate.now());
+            this.setCreatedAt(LocalDateTime.now());
         }
-        this.setUpdatedAt(LocalDate.now());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 
 }

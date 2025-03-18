@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderDto;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,9 +20,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     private Double odometer;
 
@@ -36,8 +36,8 @@ public class Order {
         orderItems.forEach(item -> item.setOrder(this));
 
         this.setOdometer(dto.odometer());
-        this.setCreatedAt(LocalDate.now());
-        this.setUpdatedAt(LocalDate.now());
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
         this.setItems(orderItems);
     }
 }

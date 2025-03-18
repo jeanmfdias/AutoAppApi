@@ -9,7 +9,7 @@ import jeanmfdias.auto.app.api.domain.order.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class OrderService {
 
             order.setItems(orderItems);
         }
-        order.setUpdatedAt(LocalDate.now());
+        order.setUpdatedAt(LocalDateTime.now());
         this.orderRepository.save(order);
         return order;
     }
