@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("orders")
 public class OrderController {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Autowired
     private OrderService orderService;
