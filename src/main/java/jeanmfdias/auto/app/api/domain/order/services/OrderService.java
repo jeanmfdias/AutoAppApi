@@ -48,6 +48,17 @@ public class OrderService {
         return order;
     }
 
+    public boolean delete(Long id) {
+        var order = this.orderRepository.getReferenceById(id);
+        this.removeItems(order);
+        this.orderRepository.delete(order);
+
+        if (this.orderRepository.existsById(id)) {
+            return false;
+        }
+        return true;
+    }
+
     private void removeItems(Order order) {
         order.getItems().forEach(item -> {
             var oi = this.orderItemRepository.getReferenceById(item.getId());
