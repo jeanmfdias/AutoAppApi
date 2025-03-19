@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class HandlerErrorTest {
 
     @Test
-    public void shouldReturnAnInstanceOfResponseEntity() throws JsonProcessingException {
+    void shouldReturnAnInstanceOfResponseEntity() throws JsonProcessingException {
         // ARRANGE
         var handlerError = new HandlerError();
         var error = new EntityNotFoundException("Not found");
