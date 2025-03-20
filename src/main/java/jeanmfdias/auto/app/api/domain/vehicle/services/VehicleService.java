@@ -1,6 +1,7 @@
 package jeanmfdias.auto.app.api.domain.vehicle.services;
 
 import jeanmfdias.auto.app.api.domain.vehicle.Vehicle;
+import jeanmfdias.auto.app.api.domain.vehicle.dto.CreateVehicleDto;
 import jeanmfdias.auto.app.api.domain.vehicle.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,12 @@ public class VehicleService {
 
     public Vehicle getOne(Long id) {
         return this.vehicleRepository.getReferenceById(id);
+    }
+
+    public Vehicle save(CreateVehicleDto createVehicleDto) {
+        var vehicle = new Vehicle(createVehicleDto);
+        this.vehicleRepository.save(vehicle);
+        return vehicle;
     }
 
 }
