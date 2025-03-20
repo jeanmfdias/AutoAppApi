@@ -1,6 +1,5 @@
 package jeanmfdias.auto.app.api.domain.vehicle.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jeanmfdias.auto.app.api.domain.order.dto.OrderDto;
 import jeanmfdias.auto.app.api.domain.vehicle.Vehicle;

@@ -4,6 +4,8 @@ import jeanmfdias.auto.app.api.domain.vehicle.Vehicle;
 import jeanmfdias.auto.app.api.domain.vehicle.dto.CreateVehicleDto;
 import jeanmfdias.auto.app.api.domain.vehicle.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +22,10 @@ public class VehicleService {
         var vehicle = new Vehicle(createVehicleDto);
         this.vehicleRepository.save(vehicle);
         return vehicle;
+    }
+
+    public Page<Vehicle> getAll(Pageable pagination) {
+        return this.vehicleRepository.findAll(pagination);
     }
 
 }
