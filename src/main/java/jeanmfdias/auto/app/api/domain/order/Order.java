@@ -2,6 +2,7 @@ package jeanmfdias.auto.app.api.domain.order;
 
 import jakarta.persistence.*;
 import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderDto;
+import jeanmfdias.auto.app.api.domain.vehicle.Vehicle;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,10 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
     public Order(CreateOrderDto dto) {
         List<OrderItem> orderItems = dto.items().stream()
