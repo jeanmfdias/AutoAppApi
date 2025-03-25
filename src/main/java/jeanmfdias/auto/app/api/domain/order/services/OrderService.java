@@ -6,6 +6,7 @@ import jeanmfdias.auto.app.api.domain.order.dto.CreateOrderDto;
 import jeanmfdias.auto.app.api.domain.order.dto.UpdateOrderDto;
 import jeanmfdias.auto.app.api.domain.order.repositories.OrderItemRepository;
 import jeanmfdias.auto.app.api.domain.order.repositories.OrderRepository;
+import jeanmfdias.auto.app.api.domain.vehicle.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,16 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private VehicleRepository vehicleRepository;
+
+    @Autowired
     private OrderItemRepository orderItemRepository;
 
     public Order create(CreateOrderDto dto) {
         var order = new Order(dto);
+        var vehicle = this.vehicleRepository.getReferenceById(dto.vehicleId());
+        order.setVehicle(vehicle);
+
         this.orderRepository.save(order);
         return order;
     }
