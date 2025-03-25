@@ -28,4 +28,13 @@ public class VehicleService {
         return this.vehicleRepository.findAll(pagination);
     }
 
+    public Boolean delete(Long id) {
+        var vehicle = this.vehicleRepository.getReferenceById(id);
+        this.vehicleRepository.delete(vehicle);
+        if (this.vehicleRepository.existsById(id)) {
+            return true;
+        }
+        return false;
+    }
+
 }

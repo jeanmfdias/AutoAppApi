@@ -13,6 +13,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("vehicles")
 public class VehicleController {
@@ -38,6 +40,12 @@ public class VehicleController {
         var page = this.vehicleService.getAll(pagination)
                 .map(VehicleDto::new);
         return ResponseEntity.ok(page);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        var deleted = this.vehicleService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }
