@@ -9,9 +9,13 @@ import jeanmfdias.auto.app.api.domain.order.dto.OrderDto;
 import jeanmfdias.auto.app.api.domain.order.dto.UpdateOrderDto;
 import jeanmfdias.auto.app.api.domain.order.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -51,6 +55,14 @@ public class OrderController {
             return ResponseEntity.ok(this.objectMapper.writeValueAsString(json));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<OrderDto>> getAll(@PageableDefault(size = 10, sort = "vehicleId") Pageable pageable) {
+        var page = this.orderService.getAll(pageable)
+                .map(OrderDto::new);
+
+        return ResponseEntity.ok(page);
     }
 
 }

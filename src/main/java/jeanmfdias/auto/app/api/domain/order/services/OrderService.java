@@ -8,6 +8,8 @@ import jeanmfdias.auto.app.api.domain.order.repositories.OrderItemRepository;
 import jeanmfdias.auto.app.api.domain.order.repositories.OrderRepository;
 import jeanmfdias.auto.app.api.domain.vehicle.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +27,10 @@ public class OrderService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    public Page<Order> getAll(Pageable pagination) {
+        return this.orderRepository.findAll(pagination);
+    }
 
     public Order create(CreateOrderDto dto) {
         var order = new Order(dto);
