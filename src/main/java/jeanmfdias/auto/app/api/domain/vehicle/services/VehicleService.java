@@ -37,4 +37,8 @@ public class VehicleService {
         return false;
     }
 
+    public Long getOdometer(Long vehicleId) {
+        return this.vehicleRepository.findbyIdOrderByOdometerMax(vehicleId);
+    }
+
 }

@@ -5,7 +5,9 @@ import jakarta.validation.Valid;
 import jeanmfdias.auto.app.api.domain.vehicle.Vehicle;
 import jeanmfdias.auto.app.api.domain.vehicle.dto.CreateVehicleDto;
 import jeanmfdias.auto.app.api.domain.vehicle.dto.VehicleDto;
+import jeanmfdias.auto.app.api.domain.vehicle.dto.VehicleOdometerDto;
 import jeanmfdias.auto.app.api.domain.vehicle.services.VehicleService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +48,13 @@ public class VehicleController {
     public ResponseEntity delete(@PathVariable Long id) {
         var deleted = this.vehicleService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{id}/odometer")
+    public ResponseEntity<VehicleOdometerDto> getOdometerActual(@PathVariable(name = "id") Long id) {
+        Long odometer = this.vehicleService.getOdometer(id);
+        Vehicle vehicle = this.vehicleService.getOne(id);
+        return ResponseEntity.ok(new VehicleOdometerDto(vehicle, odometer));
     }
 
 }
