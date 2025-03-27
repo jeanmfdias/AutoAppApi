@@ -15,7 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -60,6 +59,16 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<Page<OrderDto>> getAll(@PageableDefault(size = 10, sort = "vehicleId") Pageable pageable) {
         var page = this.orderService.getAll(pageable)
+                .map(OrderDto::new);
+
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("vehicle/{id}")
+    public ResponseEntity<Page<OrderDto>> getAllByVehicle(@PageableDefault(size = 10, sort = "createdAt")
+                                                              Pageable pagination,
+                                                          @PathVariable(name = "id") Long vehicleId) {
+        var page = this.orderService.getAllByVehicle(vehicleId, pagination)
                 .map(OrderDto::new);
 
         return ResponseEntity.ok(page);

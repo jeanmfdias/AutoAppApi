@@ -32,6 +32,10 @@ public class OrderService {
         return this.orderRepository.findAll(pagination);
     }
 
+    public Page<Order> getAllByVehicle(Long vehicleId, Pageable pagination) {
+        return this.orderRepository.findAllByVehicleId(vehicleId, pagination);
+    }
+
     public Order create(CreateOrderDto dto) {
         var order = new Order(dto);
         var vehicle = this.vehicleRepository.getReferenceById(dto.vehicleId());
