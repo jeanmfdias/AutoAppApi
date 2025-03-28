@@ -3,6 +3,8 @@ package jeanmfdias.auto.app.api.domain.vehicle.services;
 import jeanmfdias.auto.app.api.domain.vehicle.repositories.VehicleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -20,14 +22,19 @@ class VehicleServiceTest {
     @Mock
     private VehicleRepository vehicleRepository;
 
+    @Captor
+    private ArgumentCaptor<Long> longCaptor;
+
     @Test
     void testShouldReturnOneVehicle() {
         // ARRANGE
+        Long id = 1L;
 
         // ACT
-        this.vehicleService.getOne(1L);
+        this.vehicleService.getOne(id);
 
         //ASSERT
-        then(this.vehicleRepository).should().getReferenceById(any());
+        then(this.vehicleRepository).should().getReferenceById(longCaptor.capture());
+        assertEquals(id, longCaptor.getValue());
     }
 }
