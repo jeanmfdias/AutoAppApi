@@ -26,8 +26,12 @@ public class VehicleController {
 
     @GetMapping("{id}")
     public ResponseEntity<VehicleDto> getOneVehicle(@PathVariable Long id) {
-        var vehicle = this.vehicleService.getOne(id);
-        return ResponseEntity.ok(new VehicleDto(vehicle));
+        try {
+            var vehicle = this.vehicleService.getOne(id);
+            return ResponseEntity.ok(new VehicleDto(vehicle));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
