@@ -2,12 +2,12 @@ spring:
   application:
     name: "api"
   datasource:
-    url: jdbc:postgresql://localhost:5432/autoappdb
-    username: postgres
-    password: secret
+    url: jdbc:postgresql://localhost:5432/${DB_NAME:autoappdb}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:secret}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 9999
+  port: ${APP_PORT:9999}
