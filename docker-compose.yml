@@ -13,6 +13,8 @@ services:
     env_file: ./env/env.pg
     volumes:
       - pg-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     restart: unless-stopped
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U user" ]
